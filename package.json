@@ -2,6 +2,8 @@
   "name": "hono",
   "type": "module",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "hono": "^4.12.27"
   },
   "devDependencies": {
