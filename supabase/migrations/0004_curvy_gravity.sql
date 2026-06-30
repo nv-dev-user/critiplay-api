@@ -1,0 +1,1 @@
+ALTER TABLE "games" ALTER COLUMN "created_by_profile_id" DROP NOT NULL;

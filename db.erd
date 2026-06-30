@@ -1,0 +1,89 @@
+erdiagram Model
+
+notation=bachman
+
+entity Users {
+   id: UUID key
+   // Additional fields
+}
+
+entity Roles {
+   id: INT key
+   name: VARCHAR
+}
+
+entity Profiles {
+   id: UUID key
+   canonical_username: VARCHAR partial-key
+   username: VARCHAR
+}
+
+relationship HasOneProfile {
+   Users[1] -> Profiles[1]
+}
+
+relationship HasOneRole {
+   Profiles[1] -> Roles[1]
+}
+
+// ---
+
+entity Tags {
+   id: INT key
+   name: VARCHAR partial-key
+}
+
+entity Categories {
+   id: INT key
+   name: VARCHAR partial-key
+}
+
+// ---
+
+entity Games {
+   id: UUID key
+   title: VARCHAR partial-key
+   short_description: TEXT
+
+   status: VARCHAR
+   version: VARCHAR
+
+   windows_build_link: VARCHAR
+   mac_build_link: VARCHAR
+   linux_build_link: VARCHAR
+   ios_build_link: VARCHAR
+   android_build_link: VARCHAR
+
+   is_published: BOOLEAN
+   are_feedbacks_enabled: BOOLEAN
+
+   created_at: TIMESTAMPZ
+   updated_at: TIMESTAMPZ
+}
+
+relationship HasManyGames {
+   Profiles[1] -> Games[0..N]
+}
+
+relationship HasManyTag {
+   Games[0..N] -> Tags[0..N]
+}
+
+relationship HasOneCategory {
+   Games[0..N] -> Categories[1]
+}
+
+// ---
+
+entity Feedbacks {
+   id: UUID key
+   label: VARCHAR
+   content: TEXT
+
+   created_at: TIMESTAMPZ
+   updated_at: TIMESTAMPZ
+}
+
+relationship HasManyFeedbacks {
+   Feedbacks[0..N] -> Profiles[1]
+}

@@ -1,21 +1,25 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import user from './user'
+import auth from './auth'
+import { createClient } from '@supabase/supabase-js'
+
+const origins = process.env.ORIGINS?.split(',') || []
+
+export const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_PUBLISHABLE_KEY!
+);
 
 const app = new Hono()
 
-const welcomeStrings = [
-  'Hello Hono!',
-  'To learn more about Hono on Vercel, visit https://vercel.com/docs/frameworks/backend/hono'
-]
-
 app.use('/*', cors({
-  origin: ['https://critiplay.com', 'https://www.critiplay.com'],
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  origin: origins,
+  allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true,
 }))
 
-app.get('/', (c) => {
-  return c.text(welcomeStrings.join('\n\n'))
-})
+app.route('/', user);
+app.route('/', auth);
 
 export default app
