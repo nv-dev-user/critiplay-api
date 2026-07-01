@@ -1,10 +1,12 @@
-import { eq, SQL, and } from "drizzle-orm";
-import { db } from "../connect";
-import { games } from "../schemas/public";
+import slugify from "@sindresorhus/slugify";
+import { eq, SQL, and, or, inArray, ilike, desc } from "drizzle-orm";
 
-export const getGameByTitle = async (title: string) => {
-    const game = await db.select().from(games).where(eq(games.title, title)).limit(1);
-    return game[0];
+import { db } from "@/db/connect";
+import { game_tag, game } from "@/db";
+
+export const getGameBySlug = async (slug: string) => {
+    const gameBySlug = await db.select().from(game).where(eq(game.slug, slug)).limit(1);
+    return gameBySlug[0];
 }
 
 export const insertGame = async (
@@ -15,8 +17,9 @@ export const insertGame = async (
     createdByProfile: string = '',
     createdByOrganization: string = ''
 ) => {
-    const result = await db.insert(games).values({
+    const result = await db.insert(game).values({
         title,
+        slug: slugify(title),
         version,
         categoryId,
         shortDescription,
@@ -28,29 +31,55 @@ export const insertGame = async (
     return result[0];
 }
 
-export const getGameByFilters = async (filters: { title?: string; version?: string; categoryId?: string, tags?: string[] }) => {
-    const conditions: SQL[] = [];
+export const getGamesByFilters = async (
+    filters: {
+        partialTitle?: string,
+        categoryId?: string,
+        tagIds?: string[],
+        ownerIds?: string[]
+    },
+    limit: number,
+    offset: number
+) => {
+    const conditions: (SQL | undefined)[] = [];
 
-    if (filters.title) {
-        conditions.push(eq(games.title, filters.title));
-    }
-
-    if (filters.version) {
-        conditions.push(eq(games.version, filters.version));
+    if (filters.partialTitle) {
+        const escapedPartialTitle = filters.partialTitle.replace(/[\\%_]/g, '\\$&'); // Escape % and _ characters
+        conditions.push(ilike(game.title, `%${escapedPartialTitle}%`));
     }
 
     if (filters.categoryId) {
-        conditions.push(eq(games.categoryId, filters.categoryId));
+        conditions.push(eq(game.categoryId, filters.categoryId));
     }
 
-    if (filters.tags && filters.tags.length > 0) {
-        // Assuming you have a separate table for game tags and a relationship between games and tags
-        // You would need to join that table and filter based on the provided tags.
-        // This is a placeholder for the actual implementation.
-        // conditions.push(...); // Add your tag filtering logic here
+    if (filters.ownerIds && filters.ownerIds.length > 0) {
+        conditions.push(or(
+            inArray(game.createdByProfileId, filters.ownerIds),
+            inArray(game.createdByOrganizationId, filters.ownerIds)
+        ));
     }
 
-    let query = db.select().from(games).where(and(...conditions));
+    if (filters.tagIds && filters.tagIds.length > 0) {
+        const gameIdsWithTags = await db.select({ gameId: game_tag.gameId })
+            .from(game_tag)
+            .where(inArray(game_tag.tagId, filters.tagIds));
 
-    return await query;
+        const gameIds = gameIdsWithTags.map(row => row.gameId);
+
+        if (gameIds.length > 0) {
+            conditions.push(inArray(game.id, gameIds));
+        }
+    }
+
+    const gamesList = await db
+        .select()
+        .from(game)
+        .where(
+            and(
+                ...conditions,
+                eq(game.is_published, true)
+            )
+        ).orderBy(desc(game.updatedAt)).limit(limit).offset(offset);
+
+    return gamesList;
 }

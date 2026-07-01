@@ -1,8 +1,10 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import user from './user'
-import auth from './auth'
 import { createClient } from '@supabase/supabase-js'
+
+import game from './routes/game'
+import auth from './routes/auth'
+import user from './routes/user'
 
 const origins = process.env.ORIGINS?.split(',') || []
 
@@ -21,5 +23,6 @@ app.use('/*', cors({
 
 app.route('/', user);
 app.route('/', auth);
+app.route('/', game)
 
 export default app

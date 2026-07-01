@@ -1,0 +1,1 @@
+ALTER TABLE "games" RENAME COLUMN "is_featured" TO "are_tests_enabled";
