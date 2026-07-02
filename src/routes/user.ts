@@ -1,8 +1,8 @@
-import { withSupabase } from "@supabase/server/adapters/hono";
+import { SupabaseContext } from "@supabase/server";
 import { Hono } from "hono";
 
-const user = new Hono().basePath('/user');
+// TODOs
 
-user.use('*', withSupabase({ auth: 'user' }));
+const user = new Hono<{Variables: { supabaseContext: SupabaseContext }}>().basePath('/user');
 
 export default user;

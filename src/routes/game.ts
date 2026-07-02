@@ -6,8 +6,6 @@ import { Game } from "@/db/models/game";
 
 const game = new Hono().basePath('/game');
 
-game.use('*', withSupabase({ auth: 'none' }));
-
 // Envoie toutes les informations d'un jeu (page)
 game.get('/:gameSlug', async (c) => {
     const { gameSlug } = c.req.param();
@@ -18,10 +16,10 @@ game.get('/:gameSlug', async (c) => {
 // Envoie la liste des jeux filtrés (liste, accueil, recherche)
 game.get('/', async (c) => {
     const {
-        partialTitle,
-        categoryId,
-        ownerIds,
-        tagIds,
+        partialTitle = '',
+        categoryId = '',
+        ownerIds = [],
+        tagIds = [],
         limit = 25,
         offset = 0
     }: {
@@ -36,6 +34,19 @@ game.get('/', async (c) => {
     let games: Game[] = await getGamesByFilters({ partialTitle, categoryId, ownerIds, tagIds }, limit, offset);
 
     return c.json({ games: games }, 200);
+})
+
+// TODOs
+
+game.patch('/:gameSlug', async (c) => {
+    const { gameSlug } = c.req.param();
+    const requestBody = await c.req.json();
+    return c.json({ message: `Game with slug ${gameSlug} updated successfully!`, data: requestBody }, 200);
+})
+
+game.delete('/:gameSlug', async (c) => {
+    const { gameSlug } = c.req.param();
+    return c.json({ message: `Game with slug ${gameSlug} deleted successfully!` }, 200);
 })
 
 export default game;

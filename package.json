@@ -3,9 +3,12 @@
   "type": "module",
   "scripts": {
     "dev": "vc dev --listen 3031",
+    "db:start": "npx supabase start",
     "db:generate": "npx drizzle-kit generate",
     "db:push": "npx drizzle-kit push",
-    "db:migrate": "npx drizzle-kit migrate"
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:stop": "npx supabase stop",
+    "db:reset": "npx supabase stop --no-backup && npx supabase start"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^3.0.0",
