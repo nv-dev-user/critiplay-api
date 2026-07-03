@@ -1,4 +1,4 @@
-import { SupabaseContext } from "@supabase/server";
+import type { SupabaseContext } from "@supabase/server";
 import { Hono } from "hono";
 
 // TODOs

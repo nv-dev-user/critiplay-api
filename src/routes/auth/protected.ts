@@ -1,8 +1,8 @@
-import { Context } from "hono";
+import type { SupabaseContext } from "@supabase/server";
+import type { Context } from "hono";
 import { setCookie } from "hono/cookie";
-import { SupabaseContext } from "@supabase/server";
 
-type Env = { Variables: { supabaseContext: SupabaseContext } };
+interface Env { Variables: { supabaseContext: SupabaseContext } }
 
 //* Get user information
 export const meHandler = async (c: Context<Env>) => {

@@ -1,10 +1,10 @@
-import { Context } from "hono";
+import type { SupabaseContext } from "@supabase/server";
+import type { Context } from "hono";
 import { getCookie, setCookie } from "hono/cookie";
-import { SupabaseContext } from "@supabase/server";
 
 import { getUserByCanonicalUsername, getUserByEmail, insertProfile } from "@/db/repositories/users.repository";
 
-type Env = { Variables: { supabaseContext: SupabaseContext } };
+interface Env { Variables: { supabaseContext: SupabaseContext } }
 
 interface LoginRequestBody {
     usernameOrEmail: string;
@@ -44,10 +44,14 @@ export const loginHandler = async (c: Context<Env>) => {
         }
     }
 
+    if (!existingUser.email) {
+        return c.json({ error: 'User does not have an email associated' }, 400);
+    }
+
     // Attempt to sign in the user with Supabase Auth
     const { supabase } = c.get('supabaseContext');
     const { data, error } = await supabase.auth.signInWithPassword({
-        email: existingUser.email!,
+        email: existingUser.email,
         password
     });
 
@@ -179,7 +183,7 @@ export const refreshHandler = async (c: Context<Env>) => {
     const { supabase } = c.get('supabaseContext');
 
     const refreshToken = getCookie(c, 'refresh_token');
-    if (!refreshToken) return c.json({ error: 'No refresh token' }, 401);
+    if (!refreshToken) {return c.json({ error: 'No refresh token' }, 401);}
 
     const { data, error } = await supabase.auth.refreshSession({ refresh_token: refreshToken });
 

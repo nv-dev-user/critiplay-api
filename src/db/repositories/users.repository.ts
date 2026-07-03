@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
 
+import { profile } from "@/db";
 import { db } from "@/db/connect";
 import { authUsers } from "@/db/models/auth";
-import { profile } from "@/db";
 
 const baseUserQuery = () => db.select({
     id: authUsers.id,

@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
-import { db } from "@/db/connect";
 import { tag } from "@/db";
+import { db } from "@/db/connect";
 
 export const getTagById = async (id: string) => {
     const tagById = await db.select().from(tag).where(eq(tag.id, id)).limit(1);

@@ -1,12 +1,12 @@
-import feedback from './models/feedback';
 import basicFeedbacksTypesEnum from './enums/feedbackTypes';
-import game_tag from './models/game_tag';
+import organizationRoleTypesEnum from './enums/organizationRoles';
+import feedback from './models/feedback';
 import game from './models/game';
+import game_tag from './models/game_tag';
 import { tag, category } from './models/labels';
 import organization from './models/organization';
-import profile from './models/profile';
-import organizationRoleTypesEnum from './enums/organizationRoles';
 import organization_profile from './models/organization_profile';
+import profile from './models/profile';
 
 export {
     profile,

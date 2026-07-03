@@ -3,6 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "vc dev --listen 3031",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "db:start": "npx supabase start",
     "db:generate": "npx drizzle-kit generate",
     "db:push": "npx drizzle-kit push",
@@ -20,10 +22,13 @@
     "postgres": "^3.4.9"
   },
   "devDependencies": {
+    "@hono/eslint-config": "^2.1.0",
     "@types/node": "^20.11.17",
     "drizzle-kit": "1.0.0-rc.4",
     "drizzle-orm": "1.0.0-rc.4",
+    "eslint": "^10.6.0",
     "tsx": "^4.7.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.62.1"
   }
 }

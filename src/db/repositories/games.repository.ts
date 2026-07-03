@@ -1,8 +1,9 @@
 import slugify from "@sindresorhus/slugify";
-import { eq, SQL, and, or, inArray, ilike, desc } from "drizzle-orm";
+import type { SQL} from "drizzle-orm";
+import { eq, and, or, inArray, ilike, desc } from "drizzle-orm";
 
-import { db } from "@/db/connect";
 import { game_tag, game } from "@/db";
+import { db } from "@/db/connect";
 
 export const getGameBySlug = async (slug: string) => {
     const gameBySlug = await db.select().from(game).where(eq(game.slug, slug)).limit(1);

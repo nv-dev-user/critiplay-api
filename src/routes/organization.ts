@@ -4,11 +4,11 @@ const organization = new Hono().basePath('/organization');
 
 // TODOs
 
-organization.get('/', async (c) => {
+organization.get('/', (c) => {
     return c.json({ message: 'Organization route is working!' }, 200);
 })
 
-organization.get('/:organizationId', async (c) => {
+organization.get('/:organizationId', (c) => {
     const { organizationId } = c.req.param();
     return c.json({ message: `Organization route is working for organizationId: ${organizationId}` }, 200);
 })
@@ -24,7 +24,7 @@ organization.patch('/:organizationId', async (c) => {
     return c.json({ message: `Organization with ID ${organizationId} updated successfully!`, data: requestBody }, 200);
 })
 
-organization.delete('/:organizationId', async (c) => {
+organization.delete('/:organizationId', (c) => {
     const { organizationId } = c.req.param();
     return c.json({ message: `Organization with ID ${organizationId} deleted successfully!` }, 200);
 })
