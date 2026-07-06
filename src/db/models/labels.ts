@@ -9,3 +9,6 @@ export const category = pgTable('categories', {
     id: uuid('id').primaryKey(),
     name: varchar('name', { length: 255 }).unique().notNull(),
 });
+
+export type Tag = typeof tag.$inferSelect | undefined;
+export type Category = typeof category.$inferSelect | undefined;

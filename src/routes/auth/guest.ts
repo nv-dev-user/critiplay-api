@@ -27,7 +27,7 @@ export const loginHandler = async (c: Context<Env>) => {
 
     // Validate input fields
     if (!usernameOrEmail || !password) {
-        return c.json({ error: 'All fields are required' }, 400);
+        return c.json({ message: 'All fields are required' }, 400);
     }
 
     // Normalize the input for consistency
@@ -40,12 +40,12 @@ export const loginHandler = async (c: Context<Env>) => {
         existingUser = await getUserByEmail(normalizedUsernameOrEmail);
 
         if (!existingUser) {
-            return c.json({ error: 'User does not exist' }, 400);
+            return c.json({ message: 'User does not exist' }, 400);
         }
     }
 
     if (!existingUser.email) {
-        return c.json({ error: 'User does not have an email associated' }, 400);
+        return c.json({ message: 'User does not have an email associated' }, 400);
     }
 
     // Attempt to sign in the user with Supabase Auth
@@ -55,8 +55,8 @@ export const loginHandler = async (c: Context<Env>) => {
         password
     });
 
-    if (error || !data.user) {
-        return c.json({ error: 'Invalid username or password' }, 401);
+    if (error) {
+        return c.json({ message: 'Invalid username or password' }, 401);
     } else {
         setCookie(
             c,

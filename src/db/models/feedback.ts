@@ -16,4 +16,4 @@ const feedback = pgTable("feedbacks", {
 })
 
 export default feedback;
-export type Feedback = typeof feedback.$inferSelect;
+export type Feedback = typeof feedback.$inferSelect | undefined;

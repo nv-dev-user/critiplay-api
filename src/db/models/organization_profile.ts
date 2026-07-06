@@ -14,3 +14,4 @@ const organization_profile = pgTable('organization_profile', {
 )
 
 export default organization_profile;
+export type OrganizationProfile = typeof organization_profile.$inferSelect | undefined;

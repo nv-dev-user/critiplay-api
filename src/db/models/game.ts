@@ -28,4 +28,4 @@ const game = pgTable('games', {
 });
 
 export default game;
-export type Game = typeof game.$inferSelect;
+export type Game = typeof game.$inferSelect | undefined;

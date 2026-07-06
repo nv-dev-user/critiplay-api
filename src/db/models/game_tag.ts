@@ -12,3 +12,4 @@ const game_tag = pgTable('game_tag', {
 ]));
 
 export default game_tag;
+export type GameTag = typeof game_tag.$inferSelect | undefined;

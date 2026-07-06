@@ -2,10 +2,11 @@ import slugify from "@sindresorhus/slugify";
 import type { SQL} from "drizzle-orm";
 import { eq, and, or, inArray, ilike, desc } from "drizzle-orm";
 
+import type { Game } from "../models/game";
 import { game_tag, game } from "@/db";
 import { db } from "@/db/connect";
 
-export const getGameBySlug = async (slug: string) => {
+export const getGameBySlug = async (slug: string): Promise<Game | undefined> => {
     const gameBySlug = await db.select().from(game).where(eq(game.slug, slug)).limit(1);
     return gameBySlug[0];
 }
@@ -17,7 +18,7 @@ export const insertGame = async (
     shortDescription: string,
     createdByProfile: string = '',
     createdByOrganization: string = ''
-) => {
+): Promise<Game | undefined> => {
     const result = await db.insert(game).values({
         title,
         slug: slugify(title),
@@ -41,7 +42,7 @@ export const getGamesByFilters = async (
     },
     limit: number,
     offset: number
-) => {
+): Promise<Game[]> => {
     const conditions: (SQL | undefined)[] = [];
 
     if (filters.partialTitle) {
@@ -83,4 +84,9 @@ export const getGamesByFilters = async (
         ).orderBy(desc(game.updatedAt)).limit(limit).offset(offset);
 
     return gamesList;
+}
+
+export const deleteGameBySlug = async (slug: string): Promise<Game | undefined> => {
+    const result = await db.delete(game).where(eq(game.slug, slug)).returning();
+    return result[0];
 }

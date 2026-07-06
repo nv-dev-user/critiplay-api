@@ -5,6 +5,9 @@
     "dev": "vc dev --listen 3031",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
     "db:start": "npx supabase start",
     "db:generate": "npx drizzle-kit generate",
     "db:push": "npx drizzle-kit push",
@@ -27,6 +30,7 @@
     "drizzle-kit": "1.0.0-rc.4",
     "drizzle-orm": "1.0.0-rc.4",
     "eslint": "^10.6.0",
+    "prettier": "^3.9.4",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.62.1"

@@ -8,3 +8,4 @@ const organizationRoleTypesEnum = pgEnum('organization_role_types', [
 ]);
 
 export default organizationRoleTypesEnum;
+export type OrganizationRoleTypes = typeof organizationRoleTypesEnum.enumValues[number];

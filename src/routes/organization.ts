@@ -1,32 +1,51 @@
-import { Hono } from "hono";
+import type { Context } from "hono";
+import type { Env } from "..";
+import { getUserRoleInOrganization } from "@/db/repositories/organization_profile.repository";
+import { deleteOrganizationById, getOrganizationById } from "@/db/repositories/organizations.repository";
 
-const organization = new Hono().basePath('/organization');
+export const organizationHandler = async (c: Context<Env>) => {
+    const { organizationId } = c.req.param();
+
+    const organization = await getOrganizationById(organizationId);
+    return c.json({ organization }, 200);
+}
+
+export const organizationDeletionHandler = async (c: Context<Env>) => {
+    const { supabase } = c.get('supabaseContext');
+    const { organizationId } = c.req.param();
+
+    const organization = await getOrganizationById(organizationId);
+    if (!organization) {
+        return c.json({ message: `Organization with ID ${organizationId} not found.` }, 404);
+    }
+
+    // User is authenticated (withSupabase middleware ensures this)
+    const supabaseUser = await supabase.auth.getUser();
+
+    const role = await getUserRoleInOrganization(supabaseUser.data.user!.id, organizationId);
+    if (role !== 'owner') {
+        return c.json({ message: 'You are not authorized to delete this organization.' }, 403);
+    }
+
+    // The user can now delete the organization
+    await deleteOrganizationById(organizationId);
+
+    return c.json({ message: `Organization deleted successfully!` }, 200);
+}
 
 // TODOs
 
-organization.get('/', (c) => {
-    return c.json({ message: 'Organization route is working!' }, 200);
-})
-
-organization.get('/:organizationId', (c) => {
-    const { organizationId } = c.req.param();
-    return c.json({ message: `Organization route is working for organizationId: ${organizationId}` }, 200);
-})
-
-organization.post('/', async (c) => {
+export const organizationCreationHandler = async (c: Context<Env>) => {
     const requestBody = await c.req.json();
     return c.json({ message: 'Organization created successfully!', data: requestBody }, 201);
-})
+}
 
-organization.patch('/:organizationId', async (c) => {
+export const organizationPatchHandler = async (c: Context<Env>) => {
     const { organizationId } = c.req.param();
     const requestBody = await c.req.json();
     return c.json({ message: `Organization with ID ${organizationId} updated successfully!`, data: requestBody }, 200);
-})
+}
 
-organization.delete('/:organizationId', (c) => {
-    const { organizationId } = c.req.param();
-    return c.json({ message: `Organization with ID ${organizationId} deleted successfully!` }, 200);
-})
-
-export default organization;
+export const organizationListHandler = (c: Context<Env>) => {
+    return c.json({ message: 'Organization list route is working!' }, 200);
+}

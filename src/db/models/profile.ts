@@ -9,4 +9,4 @@ const profile = pgTable('profiles', {
 });
 
 export default profile;
-export type Profile = typeof profile.$inferSelect;
+export type Profile = typeof profile.$inferSelect | undefined;

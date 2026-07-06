@@ -1,16 +1,18 @@
-import type { SupabaseContext } from "@supabase/server";
 import type { Context } from "hono";
 import { setCookie } from "hono/cookie";
 
-interface Env { Variables: { supabaseContext: SupabaseContext } }
+import { getUserById } from "@/db/repositories/users.repository";
+import type { Env } from "@/index";
 
 //* Get user information
 export const meHandler = async (c: Context<Env>) => {
     const { supabase } = c.get('supabaseContext');
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data } = await supabase.auth.getUser();
+
+    const user: User | undefined = await getUserById(data.user?.id ?? '');
 
     if (!user) {
-        return c.json({ error: 'User not authenticated' }, 401);
+        return c.json({ message: 'User not authenticated' }, 401);
     }
 
     return c.json({ user });
@@ -48,7 +50,7 @@ export const logoutHandler = async (c: Context<Env>) => {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-        return c.json({ error: 'Error signing out' }, 500);
+        return c.json({ message: 'Error signing out' }, 500);
     }
 
     return c.json({ message: 'Logout successful' });

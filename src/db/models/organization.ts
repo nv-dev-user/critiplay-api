@@ -9,4 +9,4 @@ const organization = pgTable('organizations', {
 });
 
 export default organization;
-export type Organization = typeof organization.$inferSelect;
+export type Organization = typeof organization.$inferSelect | undefined;
