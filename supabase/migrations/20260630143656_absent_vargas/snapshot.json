@@ -1,8 +1,6 @@
 {
   "id": "2c1e13b9-b7d8-4b5e-aa82-83d59291a89f",
-  "prevIds": [
-    "02c2a7f5-0554-4f9f-99cb-2b8ee2c51890"
-  ],
+  "prevIds": ["02c2a7f5-0554-4f9f-99cb-2b8ee2c51890"],
   "version": "8",
   "dialect": "postgres",
   "ddl": [
@@ -40,14 +38,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "game_id"
-      ],
+      "columns": ["game_id"],
       "schemaTo": "public",
       "tableTo": "games",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "game_tag_game_id_games_id_fk",
@@ -57,14 +51,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "tag_id"
-      ],
+      "columns": ["tag_id"],
       "schemaTo": "public",
       "tableTo": "tags",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "game_tag_tag_id_tags_id_fk",
@@ -79,9 +69,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "games_pkey",
       "schema": "public",
@@ -272,14 +260,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "created_by_profile_id"
-      ],
+      "columns": ["created_by_profile_id"],
       "schemaTo": "public",
       "tableTo": "profiles",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "games_created_by_profile_id_profiles_id_fk",
@@ -289,14 +273,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "created_by_organization_id"
-      ],
+      "columns": ["created_by_organization_id"],
       "schemaTo": "public",
       "tableTo": "organizations",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "games_created_by_organization_id_organizations_id_fk",
@@ -306,14 +286,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "category_id"
-      ],
+      "columns": ["category_id"],
       "schemaTo": "public",
       "tableTo": "categories",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "games_category_id_categories_id_fk",
@@ -328,9 +304,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "categories_pkey",
       "schema": "public",
@@ -365,9 +339,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "categories_name_unique",
       "schema": "public",
@@ -381,9 +353,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "organizations_pkey",
       "schema": "public",
@@ -449,9 +419,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "profiles_pkey",
       "schema": "public",
@@ -499,9 +467,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "canonical_username"
-      ],
+      "columns": ["canonical_username"],
       "nullsNotDistinct": false,
       "name": "profiles_canonical_username_unique",
       "schema": "public",
@@ -510,14 +476,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "schemaTo": "auth",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "profiles_id_users_id_fk",
@@ -532,9 +494,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "tags_pkey",
       "schema": "public",
@@ -569,9 +529,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "tags_name_unique",
       "schema": "public",

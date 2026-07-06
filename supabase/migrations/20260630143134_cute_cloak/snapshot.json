@@ -1,8 +1,6 @@
 {
   "id": "11ee6ad6-5473-441d-adf3-79706dd1bac4",
-  "prevIds": [
-    "b50ae5bd-450e-4d72-9dc4-525b8dd1d7e4"
-  ],
+  "prevIds": ["b50ae5bd-450e-4d72-9dc4-525b8dd1d7e4"],
   "version": "8",
   "dialect": "postgres",
   "ddl": [
@@ -13,9 +11,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "categories_pkey",
       "schema": "public",
@@ -50,9 +46,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "categories_name_unique",
       "schema": "public",
@@ -66,9 +60,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "profiles_pkey",
       "schema": "public",
@@ -116,9 +108,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "canonical_username"
-      ],
+      "columns": ["canonical_username"],
       "nullsNotDistinct": false,
       "name": "profiles_canonical_username_unique",
       "schema": "public",
@@ -127,14 +117,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "schemaTo": "auth",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "profiles_id_users_id_fk",
@@ -149,9 +135,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "tags_pkey",
       "schema": "public",
@@ -186,9 +170,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "tags_name_unique",
       "schema": "public",

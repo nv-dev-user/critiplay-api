@@ -2,18 +2,10 @@
   "version": "8",
   "dialect": "postgres",
   "id": "59187772-8c93-4fbe-b4c8-d5a40512c502",
-  "prevIds": [
-    "8e0c4d53-980e-47b4-8460-7f8ead384255"
-  ],
+  "prevIds": ["8e0c4d53-980e-47b4-8460-7f8ead384255"],
   "ddl": [
     {
-      "values": [
-        "Bug",
-        "Suggestion",
-        "Info",
-        "Question",
-        "Other"
-      ],
+      "values": ["Bug", "Suggestion", "Info", "Question", "Other"],
       "name": "basic_feedbacks_types",
       "entityType": "enums",
       "schema": "public"
@@ -543,14 +535,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "created_by"
-      ],
+      "columns": ["created_by"],
       "schemaTo": "public",
       "tableTo": "profiles",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "feedbacks_created_by_profiles_id_fk",
@@ -560,14 +548,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "game_id"
-      ],
+      "columns": ["game_id"],
       "schemaTo": "public",
       "tableTo": "games",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "feedbacks_game_id_games_id_fk",
@@ -577,14 +561,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "created_by_profile_id"
-      ],
+      "columns": ["created_by_profile_id"],
       "schemaTo": "public",
       "tableTo": "profiles",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "games_created_by_profile_id_profiles_id_fk",
@@ -594,14 +574,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "created_by_organization_id"
-      ],
+      "columns": ["created_by_organization_id"],
       "schemaTo": "public",
       "tableTo": "organizations",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "games_created_by_organization_id_organizations_id_fk",
@@ -611,14 +587,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "category_id"
-      ],
+      "columns": ["category_id"],
       "schemaTo": "public",
       "tableTo": "categories",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "games_category_id_categories_id_fk",
@@ -628,14 +600,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "game_id"
-      ],
+      "columns": ["game_id"],
       "schemaTo": "public",
       "tableTo": "games",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "game_tag_game_id_games_id_fk",
@@ -645,14 +613,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "tag_id"
-      ],
+      "columns": ["tag_id"],
       "schemaTo": "public",
       "tableTo": "tags",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "game_tag_tag_id_tags_id_fk",
@@ -662,14 +626,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "schemaTo": "auth",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "profiles_id_users_id_fk",
@@ -678,9 +638,7 @@
       "table": "profiles"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "categories_pkey",
       "schema": "public",
@@ -688,9 +646,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "feedbacks_pkey",
       "schema": "public",
@@ -698,9 +654,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "games_pkey",
       "schema": "public",
@@ -708,9 +662,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "organizations_pkey",
       "schema": "public",
@@ -718,9 +670,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "profiles_pkey",
       "schema": "public",
@@ -728,9 +678,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "tags_pkey",
       "schema": "public",
@@ -739,9 +687,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "categories_name_unique",
       "schema": "public",
@@ -750,9 +696,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "slug"
-      ],
+      "columns": ["slug"],
       "nullsNotDistinct": false,
       "name": "games_slug_unique",
       "schema": "public",
@@ -761,9 +705,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "canonical_username"
-      ],
+      "columns": ["canonical_username"],
       "nullsNotDistinct": false,
       "name": "profiles_canonical_username_unique",
       "schema": "public",
@@ -772,9 +714,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "tags_name_unique",
       "schema": "public",
@@ -782,7 +722,5 @@
       "entityType": "uniques"
     }
   ],
-  "renames": [
-    "public.games.is_featured->public.games.are_tests_enabled"
-  ]
+  "renames": ["public.games.is_featured->public.games.are_tests_enabled"]
 }

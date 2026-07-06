@@ -1,8 +1,6 @@
 {
   "id": "f09178e6-2e57-4e9d-aec5-2a9bccdb6134",
-  "prevIds": [
-    "13c973d0-ee17-468f-943b-b52903d09c29"
-  ],
+  "prevIds": ["13c973d0-ee17-468f-943b-b52903d09c29"],
   "version": "8",
   "dialect": "postgres",
   "ddl": [
@@ -13,9 +11,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "games_pkey",
       "schema": "public",
@@ -206,14 +202,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "created_by_profile_id"
-      ],
+      "columns": ["created_by_profile_id"],
       "schemaTo": "public",
       "tableTo": "profiles",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "games_created_by_profile_id_profiles_id_fk",
@@ -223,14 +215,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "created_by_organization_id"
-      ],
+      "columns": ["created_by_organization_id"],
       "schemaTo": "public",
       "tableTo": "organizations",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "games_created_by_organization_id_organizations_id_fk",
@@ -240,14 +228,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "category_id"
-      ],
+      "columns": ["category_id"],
       "schemaTo": "public",
       "tableTo": "categories",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "games_category_id_categories_id_fk",
@@ -262,9 +246,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "categories_pkey",
       "schema": "public",
@@ -299,9 +281,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "categories_name_unique",
       "schema": "public",
@@ -315,9 +295,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "organizations_pkey",
       "schema": "public",
@@ -383,9 +361,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "profiles_pkey",
       "schema": "public",
@@ -433,9 +409,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "canonical_username"
-      ],
+      "columns": ["canonical_username"],
       "nullsNotDistinct": false,
       "name": "profiles_canonical_username_unique",
       "schema": "public",
@@ -444,14 +418,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "schemaTo": "auth",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "profiles_id_users_id_fk",
@@ -466,9 +436,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "tags_pkey",
       "schema": "public",
@@ -503,9 +471,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "tags_name_unique",
       "schema": "public",

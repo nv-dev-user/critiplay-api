@@ -1,8 +1,6 @@
 {
   "id": "b50ae5bd-450e-4d72-9dc4-525b8dd1d7e4",
-  "prevIds": [
-    "00000000-0000-0000-0000-000000000000"
-  ],
+  "prevIds": ["00000000-0000-0000-0000-000000000000"],
   "version": "8",
   "dialect": "postgres",
   "ddl": [
@@ -13,9 +11,7 @@
       "entityType": "tables"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "profiles_pkey",
       "schema": "public",
@@ -63,9 +59,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "canonical_username"
-      ],
+      "columns": ["canonical_username"],
       "nullsNotDistinct": false,
       "name": "profiles_canonical_username_unique",
       "schema": "public",
@@ -74,14 +68,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "schemaTo": "auth",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "profiles_id_users_id_fk",
