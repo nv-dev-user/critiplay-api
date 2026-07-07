@@ -29,7 +29,14 @@ interface RegisterRequestBody {
 // TODO: Add rate limiting to prevent brute force attacks
 //* Login user and set cookies
 export const loginHandler = async (c: Context<Env>) => {
-  const { usernameOrEmail, password }: LoginRequestBody = await c.req.json();
+  let usernameOrEmail: string, password: string;
+  try {
+    const body: LoginRequestBody = await c.req.json();
+    usernameOrEmail = body.usernameOrEmail;
+    password = body.password;
+  } catch {
+    return c.json({ message: "Invalid request body" }, 400);
+  }
 
   // Validate input fields
   if (!usernameOrEmail || !password) {
@@ -88,8 +95,19 @@ export const loginHandler = async (c: Context<Env>) => {
 // TODO: Add rate limiting to prevent brute force attacks
 //* Register user and set cookies
 export const registerHandler = async (c: Context<Env>) => {
-  const { email, username, password, confirmPassword }: RegisterRequestBody =
-    await c.req.json();
+  let email: string,
+    username: string,
+    password: string,
+    confirmPassword: string;
+  try {
+    const body: RegisterRequestBody = await c.req.json();
+    email = body.email;
+    username = body.username;
+    password = body.password;
+    confirmPassword = body.confirmPassword;
+  } catch {
+    return c.json({ message: "Invalid request body" }, 400);
+  }
 
   // Validate input fields
   if (!email || !username || !password || !confirmPassword) {

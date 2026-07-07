@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "drizzle.config.ts"],
+  "include": ["src/**/*", "drizzle.config.ts", "tests/**/*"],
   "exclude": ["node_modules", "dist", "supabase/migrations"]
 }

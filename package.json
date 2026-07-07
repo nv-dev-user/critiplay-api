@@ -21,12 +21,14 @@
     "@supabase/supabase-js": "^2.110.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "hono": "^4.12.27",
-    "postgres": "^3.4.9"
+    "dotenv": "^17.4.2",
+    "hono": "^4.12.28",
+    "postgres": "^3.4.9",
+    "vitest": "^4.1.10"
   },
   "devDependencies": {
     "@hono/eslint-config": "^2.1.0",
-    "@types/node": "^20.19.43",
+    "@types/node": "^26.1.0",
     "drizzle-kit": "1.0.0-rc.4",
     "drizzle-orm": "1.0.0-rc.4",
     "eslint": "^10.6.0",
