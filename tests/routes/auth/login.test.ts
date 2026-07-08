@@ -1,5 +1,56 @@
-import { describe, it, expect } from "vitest";
-import app from "../../src";
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { supabase } from "../../setup";
+import { db } from "@/db/connect";
+import profile from "@/db/models/profile";
+import app from "@/index";
+
+const purgeTestUser = async () => {
+  const { data, error } = await supabase.auth.admin.listUsers();
+
+  if (error) {
+    console.error("Error listing users:", error);
+    throw error;
+  }
+
+  const testUser = data.users.find((user) => user.email === "test1@login.com");
+
+  if (testUser) {
+    const { error: deleteError } = await supabase.auth.admin.deleteUser(
+      testUser.id,
+    );
+    if (deleteError) {
+      console.error("Error deleting test user:", deleteError);
+      throw deleteError;
+    }
+  }
+};
+
+//* Set up a test user before running the login tests
+beforeAll(async () => {
+  await purgeTestUser(); // Ensure no existing test user
+
+  const { data, error } = await supabase.auth.admin.createUser({
+    email: "test1@login.com",
+    password: "password",
+    email_confirm: true,
+  });
+
+  if (error) {
+    console.error("Error creating test user:", error);
+    throw error;
+  }
+
+  if (data.user?.id) {
+    await db.insert(profile).values({
+      id: data.user.id,
+      canonicalUsername: "test1",
+      username: "Test1",
+    });
+  }
+});
+
+//* Clean up the test user after tests
+afterAll(purgeTestUser);
 
 describe("POST /auth/login", () => {
   it("should return 400 - Missing body", async () => {
@@ -43,7 +94,7 @@ describe("POST /auth/login", () => {
     const response = await app.request("/auth/login", {
       method: "POST",
       body: JSON.stringify({
-        usernameOrEmail: "test1@test.com",
+        usernameOrEmail: "test1@login.com",
         password: "wrongpassword",
       }),
     });
@@ -54,7 +105,7 @@ describe("POST /auth/login", () => {
     const response = await app.request("/auth/login", {
       method: "POST",
       body: JSON.stringify({
-        usernameOrEmail: "test1@test.com",
+        usernameOrEmail: "test1@login.com",
         password: "password",
       }),
     });

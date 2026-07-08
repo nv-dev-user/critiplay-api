@@ -3,6 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vc dev --listen 3031",
+    "test": "vitest run",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

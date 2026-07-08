@@ -71,7 +71,10 @@ export const loginHandler = async (c: Context<Env>) => {
   });
 
   if (error) {
-    return c.json({ message: "Invalid username or password" }, 401);
+    if (error.code === "invalid_credentials") {
+      return c.json({ message: "Invalid username or password" }, 401);
+    }
+    return c.json({ message: "Error occurred while signing in" }, 500);
   } else {
     setCookie(c, "access_token", data.session.access_token, {
       path: "/",
@@ -144,7 +147,6 @@ export const registerHandler = async (c: Context<Env>) => {
   const normalizedEmail = email.toLowerCase();
 
   // Check if username is already used
-  //! ERROR BD
   const existingUsername = await getUserByCanonicalUsername(normalizedUsername);
 
   if (existingUsername) {
@@ -159,8 +161,11 @@ export const registerHandler = async (c: Context<Env>) => {
   });
 
   if (error || !data.user) {
-    if (error?.message.includes("User already registered")) {
+    if (error?.code === "user_already_exists") {
       return c.json({ error: "Email already used" }, 400);
+    }
+    if (error?.code === "validation_failed") {
+      return c.json({ error: "Invalid email" }, 400);
     }
     console.error("[ERR] Error creating user in Supabase Auth:", error);
     return c.json({ error: "Unexpected error occurred" }, 500);
