@@ -4,6 +4,7 @@ import type { Profile } from "../models/profile";
 import { profile } from "@/db";
 import { db } from "@/db/connect";
 import { authUsers } from "@/db/models/auth";
+import type { User } from "@/types/user";
 
 const baseUserQuery = () =>
   db

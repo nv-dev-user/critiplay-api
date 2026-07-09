@@ -3,6 +3,7 @@ import { setCookie } from "hono/cookie";
 
 import { getUserById } from "@/db/repositories/users.repository";
 import type { Env } from "@/index";
+import type { User } from "@/types/user";
 
 //* Get user information
 export const meHandler = async (c: Context<Env>) => {

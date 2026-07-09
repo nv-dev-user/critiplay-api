@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 
+import { HTTPException } from "hono/http-exception";
 import {
   loginHandler,
   registerHandler,
@@ -80,9 +81,12 @@ app.delete(
 );
 
 //* ERROR HANDLER
-app.onError((_, c) => {
+app.onError((err, c) => {
+  if (err instanceof HTTPException) {
+    return err.getResponse();
+  }
   return c.json(
-    { message: "Something went wrong! Please try again later." },
+    { message: "Oops, something went wrong! Please try again later." },
     500,
   );
 });

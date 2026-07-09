@@ -45,16 +45,21 @@ beforeAll(async () => {
     throw error;
   }
 
-  if (data.user?.id) {
+  try {
     await db.insert(profile).values({
       id: data.user.id,
       canonicalUsername: "registeruser",
       username: "RegisterUser",
     });
+  } catch (dbError) {
+    console.error("Error inserting profile into database:", dbError);
+    throw dbError;
   }
 });
 
-afterAll(purgeTestUser);
+afterAll(async () => {
+  await purgeTestUser();
+});
 
 describe("POST /auth/register", () => {
   it("should return 400 - Missing body", async () => {

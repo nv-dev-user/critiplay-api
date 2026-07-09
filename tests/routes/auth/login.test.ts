@@ -40,12 +40,15 @@ beforeAll(async () => {
     throw error;
   }
 
-  if (data.user?.id) {
+  try {
     await db.insert(profile).values({
       id: data.user.id,
       canonicalUsername: "test1",
       username: "Test1",
     });
+  } catch (dbError) {
+    console.error("Error inserting profile into database:", dbError);
+    throw dbError;
   }
 });
 
