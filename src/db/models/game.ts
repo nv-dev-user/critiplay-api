@@ -6,6 +6,7 @@ import {
   unique,
   uuid,
   varchar,
+  integer,
 } from "drizzle-orm/pg-core";
 
 import { category, profile, organization } from "@/db";
@@ -18,6 +19,7 @@ const game = pgTable(
     slug: varchar("slug", { length: 255 }).notNull().unique(),
     version: varchar("version", { length: 32 }).notNull(),
 
+    downloadCount: integer("download_count").notNull().default(0),
     createdByProfileId: uuid("created_by_profile_id").references(
       () => profile.id,
       { onDelete: "cascade" },
@@ -33,14 +35,14 @@ const game = pgTable(
       .notNull()
       .references(() => category.id),
 
-    windows_build_link: text("windows_build_link"),
-    mac_build_link: text("mac_build_link"),
-    linux_build_link: text("linux_build_link"),
-    ios_build_link: text("ios_build_link"),
-    android_build_link: text("android_build_link"),
+    windowsBuildLink: text("windows_build_link"),
+    macBuildLink: text("mac_build_link"),
+    linuxBuildLink: text("linux_build_link"),
+    iosBuildLink: text("ios_build_link"),
+    androidBuildLink: text("android_build_link"),
 
-    is_published: boolean("is_published").notNull().default(false),
-    are_tests_enabled: boolean("are_tests_enabled").notNull().default(false),
+    isPublished: boolean("is_published").notNull().default(false),
+    areTestsEnabled: boolean("are_tests_enabled").notNull().default(false),
 
     createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
