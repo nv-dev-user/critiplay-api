@@ -1,12 +1,31 @@
 {
   "version": "8",
   "dialect": "postgres",
-  "id": "cf739d4b-af77-4ea7-8b84-9e0e5f9a4369",
-  "prevIds": ["b7ac4a34-3034-4313-bbcc-458ff47e9e1a"],
+  "id": "deab0a8d-141f-4f76-970b-5d7bad95deee",
+  "prevIds": ["cf739d4b-af77-4ea7-8b84-9e0e5f9a4369"],
   "ddl": [
     {
-      "values": ["critical", "major", "minor", "info"],
-      "name": "severity_types",
+      "values": ["bug", "suggestion", "other"],
+      "name": "basic_feedbacks_types",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "pending",
+        "in_progress",
+        "resolved",
+        "rejected",
+        "closed",
+        "duplicate"
+      ],
+      "name": "feedback_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": ["owner", "admin", "dev", "tester"],
+      "name": "organization_role_types",
       "entityType": "enums",
       "schema": "public"
     },
@@ -17,20 +36,8 @@
       "schema": "public"
     },
     {
-      "values": ["pending", "in_progress", "resolved", "rejected"],
-      "name": "feedback_status",
-      "entityType": "enums",
-      "schema": "public"
-    },
-    {
-      "values": ["bug", "suggestion", "other"],
-      "name": "basic_feedbacks_types",
-      "entityType": "enums",
-      "schema": "public"
-    },
-    {
-      "values": ["owner", "admin", "dev", "tester"],
-      "name": "organization_role_types",
+      "values": ["critical", "major", "minor", "info"],
+      "name": "severity_types",
       "entityType": "enums",
       "schema": "public"
     },
@@ -865,8 +872,5 @@
       "entityType": "uniques"
     }
   ],
-  "renames": [
-    "public.feedbacks.created_by->public.feedbacks.profile_id",
-    "public.feedbacks.label->public.feedbacks.type"
-  ]
+  "renames": []
 }

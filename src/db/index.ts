@@ -1,5 +1,8 @@
+import { feedbackStatusEnum } from "./enums/feedbackStatus";
 import basicFeedbacksTypesEnum from "./enums/feedbackTypes";
 import organizationRoleTypesEnum from "./enums/organizationRoles";
+import platformTypesEnum from "./enums/platformTypes";
+import severityTypesEnum from "./enums/severityTypes";
 import feedback from "./models/feedback";
 import game from "./models/game";
 import game_tag from "./models/game_tag";
@@ -19,4 +22,7 @@ export {
   organization_profile,
   basicFeedbacksTypesEnum,
   organizationRoleTypesEnum,
+  feedbackStatusEnum,
+  platformTypesEnum,
+  severityTypesEnum,
 };
