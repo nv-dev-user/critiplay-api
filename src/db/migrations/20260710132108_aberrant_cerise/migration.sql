@@ -1,0 +1,2 @@
+ALTER TABLE "organization_profile" RENAME CONSTRAINT "organization_profile_profile_id_organizations_id_fkey" TO "organization_profile_profile_id_profiles_id_fkey";--> statement-breakpoint
+ALTER TABLE "organization_profile" DROP CONSTRAINT "organization_profile_profile_id_profiles_id_fkey", ADD CONSTRAINT "organization_profile_profile_id_profiles_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "profiles"("id") ON DELETE CASCADE;

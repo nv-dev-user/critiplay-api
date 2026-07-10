@@ -10,6 +10,7 @@ import { tag, category } from "./models/labels";
 import organization from "./models/organization";
 import organization_profile from "./models/organization_profile";
 import profile from "./models/profile";
+import { profile_game } from "./models/profile_game";
 
 export {
   profile,
@@ -25,4 +26,5 @@ export {
   feedbackStatusEnum,
   platformTypesEnum,
   severityTypesEnum,
+  profile_game,
 };

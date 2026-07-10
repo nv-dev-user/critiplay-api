@@ -1,21 +1,22 @@
 import { pgTable, uuid } from "drizzle-orm/pg-core";
 import organization from "./organization";
+import profile from "./profile";
 import organizationRoleTypesEnum from "@/db/enums/organizationRoles";
 
 const organization_profile = pgTable(
   "organization_profile",
   {
-    organization: uuid("organization_id")
+    organizationId: uuid("organization_id")
       .notNull()
       .references(() => organization.id, { onDelete: "cascade" }),
-    profile: uuid("profile_id")
+    profileId: uuid("profile_id")
       .notNull()
-      .references(() => organization.id, { onDelete: "cascade" }),
+      .references(() => profile.id, { onDelete: "cascade" }),
     role: organizationRoleTypesEnum("role").notNull(),
   },
   (table) => [
     {
-      pk: [table.organization, table.profile],
+      pk: [table.organizationId, table.profileId],
     },
   ],
 );

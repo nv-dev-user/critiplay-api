@@ -3,6 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vc dev --listen 3031",
+    "dev:prepare": "pnpm format && pnpm lint:fix",
     "test": "vitest run",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
