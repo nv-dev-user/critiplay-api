@@ -1,6 +1,5 @@
 import { eq } from "drizzle-orm";
-import { afterAll, beforeAll, expect, it } from "vitest";
-import { describe } from "node:test";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { supabase } from "../../setup";
 import { profile } from "@/db";
 import { db } from "@/db/connect";
