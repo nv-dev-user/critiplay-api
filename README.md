@@ -1,8 +1,8 @@
-Prerequisites:
+## Prerequisites:
 
 - [Vercel CLI](https://vercel.com/docs/cli) installed globally
 
-To develop locally:
+## To develop locally:
 
 ```
 pnpm install
