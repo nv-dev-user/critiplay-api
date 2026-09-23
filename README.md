@@ -5,24 +5,7 @@ Prerequisites:
 To develop locally:
 
 ```
-npm install
-vc dev
-```
-
-```
-open http://localhost:3000
-```
-
-To build locally:
-
-```
-npm install
-vc build
-```
-
-To deploy:
-
-```
-npm install
-vc deploy
+pnpm install
+pnpm run dev # needs Vercel
+pnpm run dev2 # local dev server
 ```
